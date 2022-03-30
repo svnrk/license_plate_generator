@@ -2,6 +2,9 @@ from random import randint, choice
 from PIL import Image
 import matplotlib.pyplot as plt
 
+number_of_plates_to_generate = 1
+
+letters = "ABCDEFGHIJKLMNOPRSTUVWXY" #no 'Q','Z'
 symbol_positions = [
     (82,  17), 
     (143, 17),
@@ -10,9 +13,9 @@ symbol_positions = [
     (385, 17),
     (455, 17)
     ]
-letters = "ABCDEFGHIJKLMNOPRSTUVWXY" #no 'Q','Z'
 
-def random_plate():
+
+def random_plate() -> list:
     char_list = []
     for i in range(3):
         char_list.append(str(randint(0, 9)))
@@ -22,7 +25,8 @@ def random_plate():
 
     return char_list
 
-def image_from_plate(plate, show=False):
+
+def image_from_plate(plate: list, show=False):
     background = Image.open("symbols/blank.png")
     file_name = ''
     for index, char in enumerate(plate):
@@ -39,11 +43,12 @@ def image_from_plate(plate, show=False):
         plt.imshow(background)
         plt.show()
 
-def main(number_of_plates):
+
+def main(number_of_plates: int) -> None:
     for i in range(number_of_plates):
         plate = random_plate()
         image_from_plate(plate)
         
 
 if __name__=="__main__":
-    main(2)
+    main(number_of_plates_to_generate)
